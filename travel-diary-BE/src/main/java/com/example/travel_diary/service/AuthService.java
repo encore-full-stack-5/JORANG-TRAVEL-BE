@@ -1,6 +1,8 @@
 package com.example.travel_diary.service;
 
 
+import com.example.travel_diary.global.request.FindLoginIdRequestDto;
+import com.example.travel_diary.global.request.FindPasswordRequestDto;
 import com.example.travel_diary.global.request.SignInRequestDto;
 import com.example.travel_diary.global.request.SignUpRequestDto;
 import com.example.travel_diary.global.response.GetUserByIdResponseDto;
@@ -19,6 +21,6 @@ public interface AuthService {
 
     void deleteUserById(UUID id) throws Exception;
 
-    void findLoginId(String email);
-    void findPassword(String loginId);
+    void findLoginId(FindLoginIdRequestDto req) throws Exception;
+    void findPassword(FindPasswordRequestDto req) throws Exception;
 }
