@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/Expenses")
 @RequiredArgsConstructor
 public class ExpenseController {
-    private final ExpenseService expenseService;
+//    private final ExpenseService expenseService;
 }

@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/diaries")
 @RequiredArgsConstructor
 public class DiaryController {
-    private final DiaryService diaryService;
+//    private final DiaryService diaryService;
 }
