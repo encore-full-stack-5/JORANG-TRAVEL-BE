@@ -1,5 +1,7 @@
 package com.example.travel_diary.controller;
 
+import com.example.travel_diary.global.request.FindLoginIdRequestDto;
+import com.example.travel_diary.global.request.FindPasswordRequestDto;
 import com.example.travel_diary.global.request.SignInRequestDto;
 import com.example.travel_diary.global.request.SignUpRequestDto;
 import com.example.travel_diary.global.response.GetUserByIdResponseDto;
@@ -58,16 +60,16 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body("탈퇴 완료");
     }
 
-//    @PostMapping("/findLoginId")
-//    public ResponseEntity<String> findLoginId(@RequestBody String email){
-//        authService.findLoginId(email);
-//        return ResponseEntity.status(HttpStatus.OK).body("이메일 전송 완료");
-//    }
-//
-//    @PostMapping("/findPassword")
-//    public ResponseEntity<String> findPassword(@RequestBody String loginId){
-//        authService.findPassword(loginId);
-//        return ResponseEntity.status(HttpStatus.OK).body("이메일 전송 완료");
-//    }
+    @PostMapping("/findLoginId")
+    public ResponseEntity<String> findLoginId(@RequestBody FindLoginIdRequestDto findLoginIdRequestDto) throws Exception {
+        authService.findLoginId(findLoginIdRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body("아이디 찾기 이메일 전송 완료");
+    }
+
+    @PostMapping("/findPassword")
+    public ResponseEntity<String> findPassword(@RequestBody FindPasswordRequestDto findPasswordRequestDto) throws Exception {
+        authService.findPassword(findPasswordRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body("비밀번호 찾기 이메일 전송 완료");
+    }
 
 }
