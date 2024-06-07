@@ -26,6 +26,7 @@ public class AuthServiceImpl implements AuthService {
     private final FindLoginIdEmailSender findLoginIdEmailSender;
 
     @Override
+    @Transactional
     public UUID signUp(SignUpRequestDto signUpRequestDto) throws Exception {
         Optional<User> byEmail = userRepository.findByEmail(signUpRequestDto.email());
         if (byEmail.isPresent()) throw new Exception("이메일 있음");
@@ -35,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public void signIn(SignInRequestDto signInRequestDto) throws Exception {
         Optional<User> byLoginId = userRepository.findByLoginId(signInRequestDto.loginId());
         if (!byLoginId.get().getPassword().equals(signInRequestDto.password()))
@@ -42,6 +44,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public GetUserByIdResponseDto getUserById(UUID id) throws Exception {
         Optional<User> byId = userRepository.findById(id);
         if (byId.isEmpty()) throw new Exception("uuid 없음");
@@ -56,7 +59,6 @@ public class AuthServiceImpl implements AuthService {
         if (byId.isEmpty()) throw new Exception("uuid 없음");
         User user = byId.get();
         user.setNickname(nickname);
-        userRepository.save(user);
     }
 
     @Override
@@ -66,10 +68,10 @@ public class AuthServiceImpl implements AuthService {
         if (byId.isEmpty()) throw new Exception("uuid 없음");
         User user = byId.get();
         user.setPassword(password);
-        userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public void deleteUserById(UUID id) throws Exception {
         Optional<User> byId = userRepository.findById(id);
         if (byId.isEmpty()) throw new Exception("uuid 없음");
@@ -97,6 +99,7 @@ public class AuthServiceImpl implements AuthService {
         if (byId.isEmpty()) throw new Exception("loginId 없음");
         User user = byId.get();
         String passwordGenerator = PasswordGenerator.generateRandomPassword(13);
+
         user.setPassword(passwordGenerator);
         try {
             findPasswordEmailSender.emailSender(user.getNickname(), user.getEmail(), passwordGenerator);
