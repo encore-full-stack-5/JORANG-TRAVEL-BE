@@ -169,9 +169,9 @@ https://github.com/encore-full-stack-5/JORANG-TRAVEL-FE
 ![image](https://github.com/user-attachments/assets/4266a2da-99d2-4027-a9fe-c7a8451c26a4)
 
 ## 트러블 슈팅
-1. Google cloud storage를 사용하면서 생긴 문제점<br><br>
-원인 : Front에서 input으로 사진을 넣어줄 때, 경로를 읽어올 수 없었다.<br>
-개선 : MultipartFile type으로 받고 front에서 FormData형식으로 back으로 보내서 해결<br>
+1. Google cloud storage를 사용할 때 Front에서 file type의 input을 보낼 때 이로부터 파일 경로를 읽어올 수 없음<br><br>
+원인 : Front에서 file type의 input을 보낼 때는 파일 경로를 back으로 보내지 않는다.<br>
+개선 : Server에서 MultipartFile[] type으로 받고 front에서 FormData형식으로 server로 보내서 해결<br>
 
 2. Post entity를 Page type으로 가져올 때, 요청한 size 보다 적은 데이터를 가져옴<br><br> 
 원인 : 아래 그림과 같이 1개의 Post id에 여러 개의 Diary id가 join되어있어, size가 5라고 하면, post_id 가 4번인 것까지 가져온다.<br>
